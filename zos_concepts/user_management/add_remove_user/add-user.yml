@@ -17,10 +17,13 @@
 - hosts: cloning
   collections:
     - ibm.ibm_zos_core
-  gather_facts: no
+  gather_facts: yes
   environment: "{{ environment_vars }}"
 
   tasks:
+    - name: debug
+      debug:
+        var: ansible_env
     - name: Add user to z/OS system
       include_role:
         name: add-zos-user
