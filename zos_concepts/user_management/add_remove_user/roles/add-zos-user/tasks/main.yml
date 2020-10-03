@@ -25,15 +25,11 @@
   when: (password is not defined or not password) and generate_password is defined and generate_password
   no_log: true
 
-- name: Generate passphrase
-  set_fact:
-    passphrase: "{{ '' | generate_passphrase }}"
-  when: (passphrase is not defined or not passphrase) and generate_passphrase is defined and generate_passphrase
-  no_log: true
-
 - name: Add user
   ibm.ibm_zos_core.zos_tso_command:
-    commands: "{{ lookup('template', '../templates/add-user.j2') }}"
+    commands:
+      - "{{ lookup('template', '../templates/add-user.j2') }}"
+      - "ALTUSER {{ userid }} PASSWORD({{ password }}) NOEXPIRED"
 
 - block:
     - name: Create generic profile
@@ -62,7 +58,7 @@
 
 - name: Create the users ISPPROF data set
   ibm.ibm_zos_core.zos_data_set:
-    name: "{{ userid }}.SPF.ISPPROF"
+    name: "{{ userid }}.ISPF.ISPPROF"
     state: present
     type: pds
     space_primary: 2

@@ -1,0 +1,10 @@
+userid: DAIKI1
+password: DAIKI1
+tso_account_number: 1234
+tso_logon_procedure: IKJACCNT
+omvs_uid: 20100
+user_catalog: UCAT.DAIKI
+resources_to_permit:
+ - profile: "IBMUSER.ANSIBLE.JCLLIB"
+   authority: "UPDATE"
+   id: DAIKI1
