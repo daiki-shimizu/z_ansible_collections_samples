@@ -90,6 +90,8 @@
 
 - name: Mount ZFS to user directory
   command: mount -t zfs -f {{ omvs_zfs_data_set_name | upper }} {{ omvs_home_directory }}
+  args:
+    warn: no
 
 - name: Overwrite permissions to directory if necessary
   file:
